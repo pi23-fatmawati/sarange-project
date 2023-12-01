@@ -1,0 +1,108 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+}
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 80px;
+    padding: 0 80px;
+    width: 100%;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.10); 
+}
+
+#img-nav img {
+    width: 160px;
+}
+#help-nav-icon {
+    display: none;
+}
+#help-nav {
+    cursor: pointer;
+}
+.myContainer {
+    margin: 0;
+    display: flex;
+    padding: 40px;
+    justify-content: space-evenly;
+    align-items: center;
+}
+#img-login {
+    flex-basis: 50%;
+}
+#img-login img {
+    width: 100%;
+    max-width: 400px;
+}
+form {
+    flex-basis: 50%;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.10); 
+    width: 100%;
+    min-width: 400px;
+    border-radius: 12px;
+    padding: 20px 40px;
+}
+.form-title {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+}
+#forgotPass {
+    text-align: right;
+}
+#signUp {
+    text-align: center;
+}
+.btn-primary {
+    background-color: #52C41A;
+    border: none;
+}
+.btn-primary:hover {
+    background-color: #53c41abe;
+}
+a, #forgotPass {
+    color: #52C41A;
+}
+@media screen and (max-width: 992px) {
+    #img-login img {
+        width: 100%;
+    }
+    form {
+        min-width: 360px;
+    }
+}
+@media screen and (max-width: 578px) {
+    nav {
+        width: 100%;
+        justify-content: center;
+    }
+    #help-nav {
+        display: none;
+        visibility: hidden;
+    }
+    #help-nav-icon {
+        display: block;
+        position: absolute;
+        font-size: large;
+        right: 32px;
+        cursor: pointer;
+    }
+    .myContainer {
+        flex-direction: column;
+        gap: 20px;
+    }
+    #img-login img {
+        width: 200px;
+    }
+    form {
+        min-width: 0;
+    }
+}
