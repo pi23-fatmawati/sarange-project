@@ -1,0 +1,294 @@
+body {
+  width: 100%;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  font-family: "Roboto", sans-serif;
+}
+/* navbar start */
+.navbar {
+  width: 100%;
+  height: 70px;
+  background-color: #d3f8b7;
+}
+.navbar-brand img {
+  height: 50px;
+}
+.nav-item a {
+  color: #8dc149;
+  font-family: "Roboto", sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  text-decoration: none;
+}
+.nav-item a:hover {
+  color: #5b7d2e;
+}
+/* navbar end */
+
+/* all h1 , all p*/
+h1 {
+  color: #58b958;
+  font-size: 40px;
+  font-weight: bold;
+}
+p {
+  color: #7e7878;
+  font-size: 20px;
+}
+h5 {
+  color: #7e7878;
+}
+/* container - 1 start */
+.container {
+  margin-top: 200px;
+  align-items: center;
+  /* border: 1px solid black; */
+}
+
+.container .gambar-1 img {
+  width: 570px;
+  /* border: 1px solid black; */
+}
+/* container - 1  end*/
+/* container - 3 start  */
+.bagian-3 {
+  margin-bottom: 140px;
+}
+.bagian-3 h1 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+}
+.card-img {
+  margin-top: 80px;
+  justify-content: space-between;
+}
+.card-img img {
+  width: 250px;
+}
+/* container - 3 end  */
+/* container -4 start*/
+.bagian-4 {
+  background-color: #d9f7be;
+  padding-top: 100px;
+  padding-left: 100px;
+  padding-right: 100px;
+  align-items: center;
+}
+.bagian-4 .gambar-4 {
+  margin-right: 80px;
+}
+/* container -4 end */
+/* footer start*/
+.footer {
+  padding-left: 100px;
+  padding-right: 100px;
+  padding-top: 20px;
+  height: 100px;
+}
+.bagian-footer {
+  justify-content: space-between;
+}
+.social-media a {
+  text-decoration: none;
+  color: #58b958;
+}
+.social-media a:hover {
+  color: #2b662b;
+}
+/* footer end */
+
+/* tablet */
+@media (min-width: 768px) and (max-width: 991px) {
+  /* all h1 , all p*/
+  h1 {
+    color: #58b958;
+    font-size: 34px;
+    font-weight: bold;
+  }
+  p {
+    color: #7e7878;
+    font-size: 18px;
+  }
+  h5 {
+    color: #7e7878;
+  }
+  /* container - 1 start */
+  .container {
+    margin-top: 200px;
+    align-items: center;
+    justify-content: space-around;
+    /* border: 1px solid black; */
+  }
+
+  .container .gambar-1 img {
+    width: 350px;
+    /* border: 1px solid black; */
+  }
+  /* container - 1  end*/
+  /* container - 2 start */
+  .bagian-2 {
+    align-items: center;
+    justify-content: space-around;
+  }
+  .container .gambar-2 img {
+    width: 300px;
+  }
+  /* container - 3 start  */
+  .bagian-3 {
+    margin-bottom: 140px;
+  }
+  .bagian-3 h1 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+  }
+  .card-img {
+    margin-top: 80px;
+    justify-content: space-between;
+  }
+  .card-img img {
+    width: 200px;
+  }
+  /* container - 3 end  */
+  /* container -4 start*/
+  .bagian-4 {
+    background-color: #d9f7be;
+    padding-top: 50px;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-bottom: 50px;
+    align-items: center;
+  }
+  .bagian-4 .gambar-4 img {
+    width: 250px;
+  }
+  /* container -4 end */
+  /* footer start*/
+  .footer {
+    padding-left: 100px;
+    padding-right: 100px;
+    padding-top: 20px;
+    height: 100px;
+  }
+  .bagian-footer {
+    justify-content: space-between;
+  }
+  .social-media a {
+    text-decoration: none;
+    color: #58b958;
+  }
+  .social-media a:hover {
+    color: #2b662b;
+  }
+  /* footer end */
+  /* Navbar */
+  /* .navbar .container-fluid {
+      padding-left: 4px;
+      padding-right: 4px;
+    } */
+}
+@media (max-width: 767px) {
+  /* all h1 , all p*/
+  h1 {
+    color: #58b958;
+    font-size: 30px;
+    font-weight: bold;
+  }
+  p {
+    color: #7e7878;
+    font-size: 16px;
+  }
+  h5 {
+    color: #7e7878;
+  }
+  /* container - 1 start */
+  .container {
+    display: flex;
+    flex-direction: column;
+    margin-top: 125px;
+    padding-left: 10%;
+    align-items: center;
+    justify-content: space-around;
+    /* border: 1px solid black; */
+  }
+
+  .container .gambar-1 img {
+    width: 350px;
+    /* border: 1px solid black; */
+  }
+  /* container - 1  end*/
+  /* container - 2 start */
+  .bagian-2 {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    justify-content: space-around;
+    padding-left: 10%;
+    margin-top: 70px;
+  }
+  .container .gambar-2 img {
+    width: 300px;
+    margin-bottom: 10px;
+  }
+  /* container - 3 start  */
+  .bagian-3 {
+    margin-bottom: 80px;
+    margin-top: 80px;
+  }
+  .bagian-3 h1 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+  }
+  .card-img {
+    margin-top: 40px;
+    justify-content: space-between;
+  }
+  .card-img img {
+    width: 200px;
+    margin-top: 20px;
+  }
+  /* container - 3 end  */
+  /* container -4 start*/
+  .bagian-4 {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #d9f7be;
+    padding-top: 50px;
+    /* padding-left: 25%; */
+    padding-bottom: 50px;
+  }
+  .bagian-4 .gambar-4 img {
+    width: 300px;
+  }
+  /* container -4 end */
+  /* footer start*/
+  .footer {
+    display: block;
+    padding-top: 20px;
+    /* height: 300px; */
+  }
+  .footer .bagian-footer {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+  }
+  .social-media a {
+    text-decoration: none;
+    color: #58b958;
+  }
+  .social-media a:hover {
+    color: #2b662b;
+  }
+  .text-copy p img {
+    height: 30px;
+  }
+  /* footer end */
+}
