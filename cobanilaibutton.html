@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Mengambil Nilai Tombol</title>
+  </head>
+  <body>
+    <button id="myButton" value="NilaiTombol">Klik Saya</button>
+
+    <script>
+      var button = document.getElementById("myButton");
+
+      button.addEventListener("click", function () {
+        var nilaiTombol = button.value;
+        console.log("Nilai Tombol: " + nilaiTombol);
+      });
+    </script>
+  </body>
+</html>
