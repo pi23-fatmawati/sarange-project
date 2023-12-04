@@ -36,44 +36,51 @@
         </div>
     </nav>
     <div class="myContainer">
-        <div class="mb-3 detail-prod" id="header-page">
+        <div class="mb-3 detail-prod" id="header-page" onclick="history.back()"">
             <i class="fa-solid fa-circle-arrow-left"></i>
             Jenis Sampah
         </div>
         <div class="mb-3 product">
-            <!-- <div class="product-detail card mb-3">
+            <div class="product-detail card mb-3">
                 <div class="row g-0">
                   <div class="col-md-4" id="detail-img">
-                    <img src="../assets/bottles-plastic.jpg" class="img-fluid rounded-start" alt="Bottle Plastic">
+                    <img src="" class="img-fluid rounded-start" alt="">
                   </div>
                   <div class="col-md-8">
                     <div class="card-body">
-                      <h4 class="card-title product-detail">Botol Plastik</h4>
+                      <h4 class="card-title product-detail"></h4>
                       <div class="coin-tag">
                         <i class="fa-solid fa-coins"></i>
-                        <p>20</p>
+                        <p></p>
                       </div>
-                      <p class="card-text">
-                        <ul>
-                            <b>Ketentuan:</b>
-                            <li>Botol plastik yang dimaksud adalah segala jenis botol plastik dari berbagai ukuran, dapat digabung dengan tutup atau dipisah.</li>
-                            <li>Minimal penjualan adalah 1 kg.</li>
-                            <li>Pastikan label botol sudah dicabut.</li>
-                            <li>Cuci bersih botol plastik untuk mencegah terjadinya penularan penyakit.</li>
-                            <li>Keringkan botol yang sudah dicuci agar tidak basah dan lembab.</li>
-                            <li>Kemas sampah sebelum waktu penjemputan.</li>
-                        </ul>
-                      </p>
-                      <div class="buttons">
-                        <button type="button" class="btn" id="sellNow">Jual Sekarang</button>
+                      <br>
+                      <div class="card-text">
+                        <b>Ketentuan</b>
+                        <ul></ul>
+                      </div>
+                      <div class="buttons" style="display: none">
+                        <a href="#">
+                            <button type="button" class="btn" id="sellNow">Jual Sekarang</button>
+                        </a> <!-- link to checkout page -->
+                        <div class="counter">
+                            <button class="btn decrement" id="decrement">-</button>
+                            <input type="text" class="form-control count" id="count" value="0"></input>
+                            <button class="btn increment" id="increment">+</button>
+                        </div>
                         <button type="button" class="btn" id="cart">Masukkan Keranjang</button>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div> -->
+            </div>
+        </div>
+        <div id="bag-icon" style="display: none;">
+            <a class="bag-icon" href=""> <!--edit link to halaman checkout-->
+              <i class="fa-solid fa-bag-shopping"></i>
+              <div id="count-item"></div>
+            </a>
         </div>
     <script src="https://kit.fontawesome.com/7d2ff4abe5.js" crossorigin="anonymous"></script>
-    <script src=""></script>
+    <script src="script-detailproduct.js"></script>
 </body>
 </html>

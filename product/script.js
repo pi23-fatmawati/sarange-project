@@ -20,7 +20,7 @@ async function getDataProduct() {
                             <input type="text" class="form-control count" id="count" value="0"></input>
                             <button class="btn increment" id="increment">+</button>
                         </div>
-                        <button class="btn btn-primary" id="term">Detail</button>
+                        <a id="to-detail-page" onclick="redirectToDetailPage('${encodeURIComponent(JSON.stringify(product))}')"><button class="btn btn-primary" id="term">Detail</button></a>
                   </div>
                 </div>
             </div>
@@ -76,46 +76,48 @@ async function getDataProduct() {
                 showNotification();
             });
         });
-        const updateCountItem = () => {
-            let countItem = document.getElementById("count-item");
-            let countArray = [];
-            let productDetailsArray = [];
-            document.querySelectorAll('.count').forEach((input, index) => {
-                let countValue = parseInt(input.value) || 0;
-                if (countValue !== 0) {
-                    countArray.push(countValue);
-                    let productImg = document.querySelectorAll('.product-img')[index].src;
-                    let productTitle = document.querySelectorAll('.product-title')[index].textContent;
-                    let productCoin = document.querySelectorAll('.product-coin')[index].textContent;
-                    productDetailsArray.push({
-                        img: productImg,
-                        title: productTitle,
-                        coin: productCoin,
-                        count: countValue
-                    })
-                }
-            });
-            let totalItemCount = countArray.length;
-            countItem.innerHTML = totalItemCount;
-            localStorage.setItem('cartCount', totalItemCount);
-            localStorage.setItem('countArray', JSON.stringify(countArray));
-            localStorage.setItem('productDetails', JSON.stringify(productDetailsArray))
-        };
-        const showNotification = () => {
-            let storedCount = localStorage.getItem('cartCount');
-            if (storedCount) {
-                let countItem = document.getElementById("count-item");
-                countItem.textContent = `${storedCount} item`;
-                countItem.style.display = storedCount > 0 ? "flex" : "none";
-            }
-        };
-
-        let detailButton = document.querySelectorAll('#term');
-        detailButton.addEventListener('click',()=> {
-            
-        })
     } catch (error) {
         console.log(error);
     }
 }
-getDataProduct();
+function redirectToDetailPage(productDetails) {
+    window.location.href = `detail-product.html?product=${productDetails}`;
+}
+const updateCountItem = () => {
+    let countItem = document.getElementById("count-item");
+    let countArray = [];
+    let productDetailsArray = [];
+    document.querySelectorAll('.count').forEach((input, index) => {
+        let countValue = parseInt(input.value) || 0;
+        if (countValue !== 0) {
+            countArray.push(countValue);
+            let productImg = document.querySelectorAll('.product-img')[index].src;
+            let productTitle = document.querySelectorAll('.product-title')[index].textContent;
+            let productCoin = document.querySelectorAll('.product-coin')[index].textContent;
+            productDetailsArray.push({
+                img: productImg,
+                title: productTitle,
+                coin: productCoin,
+                count: countValue
+            })
+        }
+    });
+    let totalItemCount = countArray.length;
+    countItem.innerHTML = totalItemCount;
+    localStorage.setItem('cartCount', totalItemCount);
+    localStorage.setItem('countArray', JSON.stringify(countArray));
+    localStorage.setItem('productDetails', JSON.stringify(productDetailsArray))
+};
+const showNotification = () => {
+    let storedCount = localStorage.getItem('cartCount');
+    if (storedCount) {
+        let countItem = document.getElementById("count-item");
+        countItem.textContent = `${storedCount} item`;
+        countItem.style.display = storedCount > 0 ? "flex" : "none";
+    }
+};
+document.addEventListener("DOMContentLoaded", function () {
+    getDataProduct();
+    updateCountItem();
+    showNotification();
+});
