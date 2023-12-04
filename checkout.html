@@ -1,0 +1,250 @@
+<!-- update lokal storage when button jual sekarang clicked -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Daftar Sampah dan Koin</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="stylelita.css" />
+  </head>
+  <body>
+    <nav
+      class="navbar navbar-expand-lg navbar-light position-fixed"
+      id="navbar-1"
+    >
+      <div class="container-fluid container-md" id="myNavbar">
+        <a class="navbar-brand" href="#">
+          <img src="assets/Full Logo 3.svg" alt="" />
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div
+          class="collapse navbar-collapse navbar-list"
+          id="navbarSupportedContent"
+        >
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+            <li class="nav-item me-5">
+              <a href="#">Beranda</a>
+            </li>
+            <li class="nav-item me-5">
+              <a href="#">Jual Sampah</a>
+            </li>
+            <li class="nav-item me-5">
+              <a href="#">Riwayat</a>
+            </li>
+          </ul>
+          <a class="nav-link img-profile" href="#">
+            <img src="assets/profile.png" alt="" />
+          </a>
+        </div>
+      </div>
+    </nav>
+    <!-- Navbar end -->
+    <div
+      class="container table-responsive-lg table-responsive-md container-tabel"
+    >
+      <div class="title-table d-flex align-items-center">
+        <img src="image/Vector-shop.svg" alt="" />
+        <span>Keranjang Penjualan</span>
+      </div>
+      <table class="table table-striped align-middle">
+        <thead class="text-center">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col" colspan="2">Jenis Sampah</th>
+            <th scope="col">Koin</th>
+            <th scope="col">Jumlah (kg)</th>
+          </tr>
+        </thead>
+        <tbody class="text-center" id="table-body">
+          <!-- javascript -->
+        </tbody>
+      </table>
+    </div>
+    <!-- checkout start -->
+    <div class="checkoutBarang">
+      <nav class="navbar navbar-light fixed-bottom">
+        <div class="container-fluid d-flex">
+          <div><span>Total berat:</span><span id="total-jumlah"></span> kg</div>
+          <div><span>Total poin:</span><span id="total-poin"></span></div>
+          <div>
+            <button
+              class="btn btn-success"
+              id="set-button"
+              disabled
+              onclick="window.location.href='pickup.html'"
+            >
+              Atur Penjualan
+            </button>
+          </div>
+        </div>
+      </nav>
+    </div>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Ambil data dari penyimpanan lokal
+        const cartData =
+          JSON.parse(localStorage.getItem("productDetails")) || [];
+
+        // ambil table dari body
+        const tableBody = document.getElementById("table-body");
+
+        // ambil elemen dari total produk, total poin, and the set button
+        const totalProdukElement = document.getElementById("total-jumlah");
+        const totalPoinElement = document.getElementById("total-poin");
+        const setButton = document.getElementById("set-button");
+
+        // Inisialisasi nilai total
+        let totalProduk = 0;
+        let totalPoin = 0;
+
+        // Function u/ memperbarui total berdasarkan status kotak centang dan nilai penghitung
+        function updateTotals() {
+          totalProduk = 0;
+          totalPoin = 0;
+
+          // Looping pada checkbox dan update total produk / koin
+          const checkboxes = document.querySelectorAll(".checkbox");
+          checkboxes.forEach((checkbox, index) => {
+            const counterSpan = document.querySelector(
+              `#table-body tr:nth-child(${index + 1}) .counter`
+            );
+            const koin = cartData[index].coin;
+
+            if (checkbox.checked) {
+              const counterValue = parseInt(counterSpan.textContent);
+              totalProduk += counterValue;
+              totalPoin += counterValue * koin;
+            }
+          });
+
+          // Update total produk and total poin elements
+          totalProdukElement.textContent = totalProduk;
+          totalPoinElement.textContent = totalPoin;
+
+          // enable atau disable set button
+          setButton.disabled = !isAnyCheckboxChecked();
+        }
+
+        // Looping cartData dan mengisi tabel di halaman html
+        cartData.forEach((item, index) => {
+          const row = document.createElement("tr");
+          row.innerHTML = `
+              <th scope="row"><input type="checkbox" class="checkbox" /></th>
+              <td colspan="2"><img src="${item.img}" alt="${item.title}" /> ${item.title}</td>
+              <td>${item.coin}</td>
+              <td>
+                <button class="decrement-button" disabled>-</button>
+                <span class="counter">${item.count}</span>
+                <button class="increment-button" disabled>+</button>
+              </td>
+            `;
+          tableBody.appendChild(row);
+
+          // menambahkan event listener ke checkbox
+          const checkbox = row.querySelector(".checkbox");
+          const counterSpan = row.querySelector(".counter");
+          const incrementButton = row.querySelector(".increment-button");
+          const decrementButton = row.querySelector(".decrement-button");
+
+          checkbox.addEventListener("change", function () {
+            // Update counter berdasarkan status checkbox
+            counterSpan.textContent = checkbox.checked
+              ? item.count
+              : item.count; // kembali ke nilai awal sebelum di up / down
+
+            // Enable/Disable button berdasarkan status checkbox
+            incrementButton.disabled = !checkbox.checked;
+            decrementButton.disabled = !checkbox.checked;
+
+            // Update total produk dan koin
+            updateTotals();
+          });
+
+          // menambahkan event listener ke increment button
+          incrementButton.addEventListener("click", function () {
+            // nilai bertambah lalu update total
+            const currentValue = parseInt(counterSpan.textContent);
+            counterSpan.textContent = String(currentValue + 1);
+            updateTotals();
+          });
+
+          // menambahkan event listener ke decrement button
+          decrementButton.addEventListener("click", function () {
+            // nilai minimal 0
+            const currentValue = parseInt(counterSpan.textContent);
+            if (currentValue > 0) {
+              counterSpan.textContent = String(currentValue - 1);
+              updateTotals();
+            }
+          });
+        });
+
+        // Function untuk mengecek apakah ada checkbox lain yang dicentang
+        function isAnyCheckboxChecked() {
+          const checkboxes = document.querySelectorAll(".checkbox");
+          return Array.from(checkboxes).some((checkbox) => checkbox.checked);
+        }
+
+        // menambahkan event listener untuk set button
+        setButton.addEventListener("click", function () {
+          // membuat sebuah lokal storage jualBarang
+          const jualBarang = cartData
+            .map((item, index) => {
+              const checkbox = document.querySelector(
+                `#table-body tr:nth-child(${index + 1}) .checkbox`
+              );
+              const counterSpan = document.querySelector(
+                `#table-body tr:nth-child(${index + 1}) .counter`
+              );
+              //perhitungan total koin
+              const jumlah = checkbox.checked
+                ? parseInt(counterSpan.textContent)
+                : 0;
+              const totalKoin = item.coin * jumlah;
+
+              // nilai yang akan dikembalikan
+              return checkbox.checked
+                ? {
+                    namaSampah: item.title,
+                    koin: item.coin,
+                    jumlah: jumlah,
+                    totalKoin: totalKoin,
+                    //nama: "",
+                    //noHP: "",
+                    //alamat: "", //nanti ini diupdate saat masuk halaman atur pengiriman
+                    //tanggal: "", //nanti ini akan diupdate saat masuk halaman atur pengiriman
+                    status: "diproses", // akan diupdate saat masuk halaman proses
+                  }
+                : null;
+            })
+            .filter(Boolean); // menghapus nilai yang null
+
+          localStorage.setItem("jualBarang", JSON.stringify(jualBarang));
+          localStorage.removeItem("productDetails");
+        });
+      });
+    </script>
+  </body>
+</html>
