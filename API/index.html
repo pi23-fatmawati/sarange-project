@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Daftar Sampah dan Koin</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <nav
+      class="navbar navbar-expand-lg navbar-light position-fixed"
+      id="navbar-1"
+    >
+      <div class="container-fluid container-md" id="myNavbar">
+        <a class="navbar-brand" href="#">
+          <img src="assets/Full Logo 3.svg" alt="" />
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div
+          class="collapse navbar-collapse navbar-list"
+          id="navbarSupportedContent"
+        >
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+            <li class="nav-item me-5">
+              <a href="#">Beranda</a>
+            </li>
+            <li class="nav-item me-5">
+              <a href="#">Jual Sampah</a>
+            </li>
+            <li class="nav-item me-5">
+              <a href="#">Riwayat</a>
+            </li>
+          </ul>
+          <a class="nav-link img-profile" href="#">
+            <img src="assets/profile.png" alt="" />
+          </a>
+        </div>
+      </div>
+    </nav>
+    <!-- Navbar end -->
+    <div
+      class="container table-responsive-lg table-responsive-md container-tabel"
+    >
+      <div class="title-table d-flex align-items-center">
+        <img src="image/Vector-shop.svg" alt="" />
+        <span>Keranjang Penjualan</span>
+      </div>
+      <table class="table table-striped align-middle">
+        <thead class="text-center">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col" colspan="2">Jenis Sampah</th>
+            <th scope="col">Koin</th>
+            <th scope="col">Jumlah (kg)</th>
+          </tr>
+        </thead>
+        <tbody class="text-center" id="table-body">
+          <!-- javascript -->
+        </tbody>
+      </table>
+    </div>
+    <!-- checkout start -->
+    <div class="checkoutBarang">
+      <nav class="navbar navbar-light fixed-bottom">
+        <div class="container-fluid d-flex">
+          <div><span>Total produk:</span></div>
+          <div><span>Total poin:</span></div>
+          <div>
+            <button class="btn btn-success" id="save-button">
+              Jual Sekarang
+            </button>
+          </div>
+        </div>
+      </nav>
+    </div>
+    <!-- checkout end -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+    <script src="script.js"></script>
+    <!-- <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Retrieve data from local storage
+        const cartData = JSON.parse(localStorage.getItem("cartData")) || [];
+
+        // Get the table body element
+        const tableBody = document.getElementById("table-body");
+
+        // Loop through the cartData and populate the table
+        cartData.forEach((item) => {
+          const row = document.createElement("tr");
+          row.innerHTML = `
+            <th scope="row"><input type="checkbox" class="checkbox" /></th>
+            <td colspan="2"><img src="${item.gambar}" alt="${item.namaSampah}" /> ${item.namaSampah}</td>
+            <td>${item.koin}</td>
+            <td><button class="decrement-button" disabled>-</button><span class="counter">0</span><button class="increment-button" disabled>+</button></td>
+          `;
+          tableBody.appendChild(row);
+          // Add event listener to the checkbox
+          const checkbox = row.querySelector(".checkbox");
+          const counterSpan = row.querySelector(".counter");
+          const incrementButton = row.querySelector(".increment-button");
+          const decrementButton = row.querySelector(".decrement-button");
+
+          checkbox.addEventListener("change", function () {
+            // Update the counter based on the checkbox state
+            counterSpan.textContent = checkbox.checked ? "1" : "0"; // Reset to 0 if unchecked
+
+            // Enable/Disable buttons based on the checkbox state
+            incrementButton.disabled = !checkbox.checked;
+            decrementButton.disabled = !checkbox.checked;
+
+            // Enable/Disable the save button based on the checkbox state
+            saveButton.disabled = !isAnyCheckboxChecked();
+          });
+
+          // Add event listener to the increment button
+          incrementButton.addEventListener("click", function () {
+            // Increment the counter
+            counterSpan.textContent = String(
+              parseInt(counterSpan.textContent) + 1
+            );
+          });
+
+          // Add event listener to the decrement button
+          decrementButton.addEventListener("click", function () {
+            // Decrement the counter, but avoid negative values
+            const currentValue = parseInt(counterSpan.textContent);
+            if (currentValue > 0) {
+              counterSpan.textContent = String(currentValue - 1);
+            }
+          });
+        });
+      });
+    </script> -->
+  </body>
+</html>
