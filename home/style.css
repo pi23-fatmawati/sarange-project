@@ -28,7 +28,7 @@ nav{
 .nav-item a{
     color: #8DC149;
     font-family: 'Roboto', sans-serif;
-    font-weight: 500;
+    font-weight: 700;
     font-size: 15px;
     text-decoration: none;
 }
@@ -169,11 +169,16 @@ nav{
     background-color: #ffff;
     border-radius: 15px;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
-    justify-content: space-evenly;
     align-items: center;
     border: 1px solid #ebebeb;
     text-decoration: none;
     color: #000000;
+    text-align: center;
+}
+.voucher-coin a{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
 }
 a .voucher-coin:hover{
     color: #8DC149;
@@ -185,14 +190,6 @@ a .voucher-coin:hover{
     width: auto;
     height: 5vh;
 }
-.voucher-coin .img-voucher-dana img{
-    width: auto;
-    height: 6.5vh;
-}
-.voucher-coin .img-voucher-spay img{
-    width: auto;
-    height: 10vh;
-}
 .voucher-coin .total-voucher p{
     padding-top: 15px;
     font-family: 'Roboto', sans-serif;
@@ -200,9 +197,11 @@ a .voucher-coin:hover{
 }
 .voucher-coin .total-coin-voucher h3{
     padding: 5px 10px 0 0;
+    color: #52C41A;
 }
 .voucher-coin .total-coin-voucher p{
     padding-top: 10px;
+    color: #52C41A;
 }
 /* Home - Klaim coin */
 .klaim-coin a:hover{
