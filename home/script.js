@@ -1,3 +1,108 @@
+// popup confirm
+function showPopup(){
+    const inputPhoneNumber = document.getElementById('phone');
+    const numberPhone = inputPhoneNumber.value.trim();
+    if(numberPhone === ''){
+        alert ('Tolong isi nomor handphone');
+    }else{
+        const popupConfirm = document.getElementById('popup-confirm');
+        popupConfirm.style.display = 'flex'
+
+        const phoneNumber = document.getElementById('phone').value;
+        sessionStorage.setItem('inputNumber', phoneNumber);
+    
+        let showNumber = document.getElementById('phone-number');
+        showNumber.innerHTML = sessionStorage.getItem('inputNumber');
+    }
+}
+function closePopup(){
+    const popupClose = document.getElementById('popup-confirm')
+    popupClose.style.display = 'none'
+}
+// display user
+const homeUser = JSON.parse(localStorage.getItem("userSarange"));
+    if (homeUser) {
+        const userHomeName = document.getElementById("home-user");
+        userHomeName.textContent = homeUser.nama;
+    } else {
+        console.error("User information not found in localStorage");
+    }
+
+// reedem koin
+fetch('https://656d7962bcc5618d3c233961.mockapi.io/reedemLink')
+.then(res => {
+    // console.log(res);
+    return res.json();
+})
+.then(data => {
+    console.log(data)
+    let displayData = document.getElementById('reedem-coin');
+    data.forEach((item) => {
+        // console.log(item)
+        displayData.innerHTML +=
+        `
+            <div class="voucher-coin mt-3">
+                <a href="./klaim-koin.html?id=${item.id}">
+                    <div class="img-voucher">
+                        <img class="img-reedem" src="${item.image}" alt="logo">
+                        <div class="total-voucher">
+                            <p>${item.desc}</p>
+                        </div>
+                    </div>
+                    <div class="total-coin-voucher d-flex">
+                        <h3>${item.coin}</h3>
+                        <p>Koin</p>
+                    </div>
+                </a>
+            </div>
+        `;
+    });
+})
+.catch(err => {
+    console.log(err);
+})
+// page href dari reedem koin
+document.addEventListener('DOMContentLoaded', function(){
+    const urlParams = new URLSearchParams(window.location.search);
+    const idParams = urlParams.get('id');
+    // console.log(idParams)
+    fetch('https://656d7962bcc5618d3c233961.mockapi.io/reedemLink/' + idParams)
+    .then(res => {
+    // console.log(res);
+        return res.json();
+    })
+    .then(data => {
+        console.log(data)
+        // console.log(item)
+            const klaimDesc = document.getElementById('klaim-desc');
+            klaimDesc.innerHTML +=
+            `<div class="text-klaim p-4">
+             <img src="${data.image}" alt="" id="img">
+            <h3>${data.desc}</h3>
+            <h1>${data.coin} <span>Koin</span></h1>
+            <div class="text-desc-klaim mt-3">
+                <p>Hadiah akan dikirimkan oleh kami melalui email terdaftar. <br>
+                Pastikan nomor tujuan pengiriman saldo sudah benar.
+                </p>
+                <p>Hadiah yang sudah diklaim tidak dapat dibatalkan. <br>
+                Informasi lebih lanjut hubungi kami. </p>
+            </div>
+            <a href="./reedem-coin.html" class="btn-back">Kembali</a>
+            <a href="./input-number.html" class="button-klaim">Klaim</a>
+        </div>`
+        
+    })
+    .catch(err => {
+        console.log(err);
+    })
+})
+// display coin
+const sisaKoinAwal = localStorage.getItem ('totalKoin');
+if(sisaKoinAwal !== null){
+    document.querySelector('.total-coin').innerHTML = sisaKoinAwal;
+}
+
+
 // dropdown menu filter table history koin
 const dropdownTable = document.getElementById('dropdown-filter');
 dropdownTable.addEventListener('change', tableDisplay);
@@ -19,130 +124,55 @@ function tableDisplay(){
 }
 tableDisplay()
 
-// popup confirm
-function showPopup(){
-    const popupConfirm = document.getElementById('popup-confirm');
-    popupConfirm.style.display = 'flex'
+// koin berkurang ketika reedem dan catatan riwayat transaksi
+function submitNumber(){
+    const totalKoin = parseInt(localStorage.getItem('totalKoin'));
+    const totalReedem = 700;
 
-    const phoneNumber = document.getElementById('phone').value;
-    sessionStorage.setItem('inputNumber', phoneNumber);
-    
-    let showNumber = document.getElementById('phone-number');
-    showNumber.innerHTML = sessionStorage.getItem('inputNumber');
+    if (totalKoin >= totalReedem){
+        const sisaKoin = totalKoin - totalReedem;
+
+        localStorage.setItem('totalKoin', sisaKoin);
+
+        const transaksiBaru = {
+            jumlah: totalReedem,
+            tanggal: new Date().toLocaleDateString()
+        };
+
+        let transaksi = JSON.parse(localStorage.getItem('transaksi')) || [];
+        transaksi.push(transaksiBaru);
+        localStorage.setItem('transaksi', JSON.stringify(transaksi));
+
+        tampilkanTransaksi(transaksi);
+        document.querySelector('total-coin').textContent = sisaKoin;
+    }else{
+        alert('Koin tidak mencukupi')
+        window.location.href = './home.html'
+    }
 }
-function closePopup(){
-    const popupClose = document.getElementById('popup-confirm')
-    popupClose.style.display = 'none'
+
+function tampilkanTransaksi(transaksi){
+    const tableTransaksi = document.getElementById('table-transaksi');
+    tableTransaksi.innerHTML = '';
+
+    transaksi.forEach((item) => {
+        const row = `<thead>
+                        <tr>
+                            <th scope="col">Tanggal</th>
+                            <th scope="col">Keterangan</th>
+                            <th scope="col">Total Pembayaran</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>${item.tanggal}</td>
+                            <td>Koin ditukar</td>
+                            <td>${item.jumlah}</td>
+                        </tr>
+                    </tbody>`;
+        tableTransaksi.innerHTML += row;
+    })
 }
 
-// reedem koin
-fetch('https://656d7962bcc5618d3c233961.mockapi.io/reedemLink')
-.then(res => {
-    // console.log(res);
-    return res.json();
-})
-.then(data => {
-    // console.log(data)
-    let displayData = document.getElementById('reedem-coin');
-    data.forEach((item, index) => {
-        console.log(item)
-        displayData.insertAdjacentHTML('beforeend',
-        `
-            <div class="voucher-coin mt-3">
-                <a href="./klaim-gopay-20k.html#${index + 1}">
-                    <div class="img-voucher">
-                        <img class="img-reedem" src="${item.image}" alt="logo">
-                        <div class="total-voucher">
-                            <p>${item.desc}</p>
-                        </div>
-                    </div>
-                    <div class="total-coin-voucher d-flex">
-                        <h3>${item.coin}</h3>
-                        <p>Koin</p>
-                    </div>
-                </a>
-            </div>
-        `);
-    });
-})
-.catch(err => {
-    console.log(err);
-})
-
-// function updateContent(){
-//     const fragment = window.location.hash.substr(1);
-
-//     const klaimDesc = document.getElementById('klaim-desc');
-//     const textDescKlaim = document.querySelector('.text-desc-klaim');
-
-//     switch (fragment){
-//         case '1':
-//             klaimDesc.innerHTML = `
-//             <div class="text-klaim p-4">
-//                 <img src="../assets/gopay-logo.png" alt="">
-//                 <h3>Saldo Gopay Rp. 20.000</h3>
-//                 <h1>300 <span>Koin</span></h1>
-//                 <div class="text-desc-klaim mt-3">
-//                     <p>Dapatkan saldo gopay sebesar Rp. 20.000.</p>
-//                     <p>Hadiah akan dikirimkan oleh kami melalui email terdaftar. <br>
-//                     Pastikan nomor tujuan pengiriman saldo sudah benar.
-//                     </p>
-//                     <p>Hadiah yang sudah diklaim tidak dapat dibatalkan. <br>
-//                     Informasi lebih lanjut hubungi kami. </p>
-//                 </div>
-//                 <a href="./reedem-coin.html" class="btn-back">Kembali</a>
-//                 <a href="./input-number.html" class="button-klaim">Klaim</a>
-//             </div>`;
-//             break;
-//         case '2':
-//             klaimDesc.innerHTML = `
-//             <div class="text-klaim p-4">
-//                 <img src="../assets/dana-logo.png" alt="">
-//                 <h3>Saldo Dana Rp. 20.000</h3>
-//                 <h1>300 <span>Koin</span></h1>
-//                 <div class="text-desc-klaim mt-3">
-//                     <p>Dapatkan saldo dana sebesar Rp. 20.000.</p>
-//                     <p>Hadiah akan dikirimkan oleh kami melalui email terdaftar. <br>
-//                     Pastikan nomor tujuan pengiriman saldo sudah benar.
-//                     </p>
-//                     <p>Hadiah yang sudah diklaim tidak dapat dibatalkan. <br>
-//                     Informasi lebih lanjut hubungi kami. </p>
-//                 </div>
-//                 <a href="./reedem-coin.html" class="btn-back">Kembali</a>
-//                 <a href="./input-number.html" class="button-klaim">Klaim</a>
-//             </div>`
-//     }
-// }
-// document.addEventListener('DOMContentLoaded', updateContent);
-// window.addEventListener('hashchange', updateContent);
-
-// // konten reedem
-// fetch('https://656bda9ee1e03bfd572ddc89.mockapi.io/sarange/klaimKoin');
-// then(res =>{
-//     return res.json();
-//     console.log(res);
-// })
-// .then(data =>{
-//     let displayContent = document.getElementById('klaim-desc');
-
-//     data.map((content) =>{
-//         displayContent.innerHTML = 
-//         `<div class="text-klaim p-4">
-//             <img src="${content.image}" alt="">
-//             <h3>Saldo Gopay Rp. 20.000</h3>
-//             <h1>300 <span>Koin</span></h1>
-//             <div class="text-desc-klaim mt-3">
-//                 <p>Dapatkan saldo gopay sebesar Rp. 20.000.</p>
-//                 <p>Hadiah akan dikirimkan oleh kami melalui email terdaftar. <br>
-//                 Pastikan nomor tujuan pengiriman saldo sudah benar.
-//                 </p>
-//                 <p>Hadiah yang sudah diklaim tidak dapat dibatalkan. <br>
-//                 Informasi lebih lanjut hubungi kami. </p>
-//             </div>
-//             <a href="./reedem-coin.html" class="btn-back">Kembali</a>
-//             <a href="./input-number.html" class="button-klaim">Klaim</a>
-//         </div>`
-//     })
-// });
-
-
+const transaksiAwal = JSON.parse(localStorage.getItem('transaksi')) || [];
+tampilkanTransaksi(transaksiAwal);

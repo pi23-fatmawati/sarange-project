@@ -12,7 +12,7 @@
         <img src="../assets/image-input-number.png" alt="">
         <p>Nomor handphone yang dimasukkan harus benar, aktif, 
             dan tidak sama dengan akun yang lain</p>
-        <form>
+        <form id="my-form">
             <div class="mb-3">
                 <label for="phone" class="form-label">Nomor handphone anda</label>
                 <input type="tel" name="phone_number" id="phone" class="form-control" placeholder="Masukkan nomor anda" required>
@@ -30,7 +30,7 @@
                 <p>Email: <span>xxx@xxx.com</span></p>
                 <p class="desc-popup">Pastikan nomor handphone dan email anda sudah benar</p>
                 <button class="btn-close-popup" id="close-popup" onclick="closePopup()">Kembali</button>
-                <a href="./klaim-finish.html" class="button-klaim">Kirim</a>
+                <a href="./klaim-finish.html" class="button-klaim" onclick="submitNumber()">Kirim</a>
             </div>
         </div>
     </div>
