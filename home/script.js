@@ -1,9 +1,3 @@
-const sisaKoinAwal = localStorage.getItem ('totalKoin');
-if(sisaKoinAwal !== null){
-    document.querySelector('.total-coin').innerHTML = sisaKoinAwal;
-} else {
-    document.querySelector('.total-coin').innerHTML = 0;
-}
 // popup confirm
 function showPopup(){
     const inputPhoneNumber = document.getElementById('phone');
@@ -15,24 +9,16 @@ function showPopup(){
         popupConfirm.style.display = 'flex'
 
         const phoneNumber = document.getElementById('phone').value;
-        sessionStorage.setItem('inputNumber', phoneNumber);
+        localStorage.setItem('inputNumber', phoneNumber);
     
         let showNumber = document.getElementById('phone-number');
-        showNumber.innerHTML = sessionStorage.getItem('inputNumber');
+        showNumber.innerHTML = localStorage.getItem('inputNumber');
     }
 }
 function closePopup(){
     const popupClose = document.getElementById('popup-confirm')
     popupClose.style.display = 'none'
 }
-// display user
-const homeUser = JSON.parse(localStorage.getItem("userSarange"));
-    if (homeUser) {
-        const userHomeName = document.getElementById("home-user");
-        userHomeName.textContent = homeUser.nama;
-    } else {
-        console.error("User information not found in localStorage");
-    }
 
 // reedem koin
 fetch('https://656d7962bcc5618d3c233961.mockapi.io/reedemLink')
@@ -67,6 +53,7 @@ fetch('https://656d7962bcc5618d3c233961.mockapi.io/reedemLink')
 .catch(err => {
     console.log(err);
 })
+
 // page href dari reedem koin
 document.addEventListener('DOMContentLoaded', function(){
     const urlParams = new URLSearchParams(window.location.search);
@@ -78,7 +65,6 @@ document.addEventListener('DOMContentLoaded', function(){
         return res.json();
     })
     .then(data => {
-        console.log(data)
         // console.log(item)
             const klaimDesc = document.getElementById('klaim-desc');
             klaimDesc.innerHTML +=
@@ -102,8 +88,17 @@ document.addEventListener('DOMContentLoaded', function(){
         console.log(err);
     })
 })
-// display coin
 
+// display coin
+const sisaKoinAwal = JSON.parse(localStorage.getItem('totalKoin'));
+
+if(sisaKoinAwal !== null){
+    document.querySelector('.total-coin').innerHTML = sisaKoinAwal;
+}
+
+// display transaksi koin
+const transaksiAwalKoin = JSON.parse(localStorage.getItem('transaksi')) || [];
+tampilkanTransaksi(transaksiAwalKoin);
 
 // dropdown menu filter table history koin
 const dropdownTable = document.getElementById('dropdown-filter');
@@ -128,13 +123,14 @@ tableDisplay()
 
 // koin berkurang ketika reedem dan catatan riwayat transaksi
 function submitNumber(){
-    const totalKoin = parseInt(localStorage.getItem('totalKoin'));
+    const getKoinLocalStorage = JSON.parse(localStorage.getItem('totalKoin'));
+
     const totalReedem = 700;
 
-    if (totalKoin >= totalReedem){
-        const sisaKoin = totalKoin - totalReedem;
+    if (getKoinLocalStorage >= totalReedem){
+        const sisaKoin = getKoinLocalStorage - totalReedem;
 
-        localStorage.setItem('totalKoin', sisaKoin);
+        localStorage.setItem('totalKoin', JSON.stringify(sisaKoin));
 
         const transaksiBaru = {
             jumlah: totalReedem,
@@ -158,13 +154,7 @@ function tampilkanTransaksi(transaksi){
     tableTransaksi.innerHTML = '';
 
     transaksi.forEach((item) => {
-        const row = `<thead>
-                        <tr>
-                            <th scope="col">Tanggal</th>
-                            <th scope="col">Keterangan</th>
-                            <th scope="col">Total Pembayaran</th>
-                        </tr>
-                    </thead>
+        const row = `
                     <tbody>
                         <tr>
                             <td>${item.tanggal}</td>
@@ -175,6 +165,3 @@ function tampilkanTransaksi(transaksi){
         tableTransaksi.innerHTML += row;
     })
 }
-
-const transaksiAwal = JSON.parse(localStorage.getItem('transaksi')) || [];
-tampilkanTransaksi(transaksiAwal);
