@@ -5,14 +5,19 @@
     margin: 0;
     padding: 0;
     font-family: 'Roboto', sans-serif;
+} 
+a {
+    text-decoration: none;
+    color: inherit;
 }
-
 nav{
     height: 80px;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
     top: 0;
     width: 100%;
-    z-index: 1;
+    z-index: 2;
+    background-color: white;
+    
 }
 #myNavbar{
     background-color: #ffff;
@@ -22,14 +27,14 @@ nav{
     height: auto;
 }
 .img-profile img{
-    width: 50px;
+    width: 48px;
 }
 .nav-item a{
     color: #8C8C8C;
     font-weight: 700;
     text-decoration: none;
 }
-.nav-item a.active-page{
+.nav-item a:hover, .navbar-nav li.active a {
     color: #52C41A;
 }
 .nav-item a:hover{
@@ -37,6 +42,7 @@ nav{
 }
 .myContainer {
     margin: 0;
+    margin-top: 80px;
     display: flex;
     flex-direction: column;
     padding: 40px 80px;
@@ -74,6 +80,13 @@ nav{
     background-color: white;
     border: 1px solid #52C41A;
     color: #52C41A;
+}
+#term a{
+    text-decoration: none;
+    color: inherit;
+}
+#to-detail-page {
+    width: 100%;
 }
 .container-card {
     display: flex;
@@ -135,7 +148,7 @@ nav{
     color: #52C41A;
 }
 .coin-tag p, .coin-tag i {
-    font-size: larger;
+    font-size: 24px;
     margin:0;
 }
 .buttons {
@@ -190,19 +203,19 @@ nav{
     color: white;
     display: none;
 }
-#order-img img {
-    height: 168px;
-    object-fit: fill;
-}
 #order-img {
-    width: fit-content;
+    height: fit-content;
+}
+#order-img img {
+    max-height: 160px;
+    width: 100%;
+    object-fit: cover;
 }
 .order-detail-wrap {
     width: 100%;
     display: flex;
     align-items: center; 
     justify-content: space-between;
-    /* border: 1px dashed black; */
     height: 100%;
 }
 .order-detail {
@@ -224,10 +237,116 @@ nav{
 .status-tag {
     padding: 8px;
     background-color: #52C41A;
-    border-radius: 16px;
+    border-radius: 20px;
     color: white;
 }
+.icon-detail {
+    display: flex;
+}
+.alamat-penjemputan-wrap {
+    align-self: stretch;
+    position: relative;
+    font-weight: 500;
+    flex-basis: 50%;
+}
+.home {
+    position: relative;
+    line-height: 24px;
+}
+.user-address {
+    position: relative;
+    color: rgb(33, 37, 41);
+    display: flex;
+    align-items: center;
+}
+.detail-address-parent {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 4px;
+}
+.mdiaddress-marker-parent {
+    align-self: stretch;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 12px;
+    gap: 20px;
+    font-size: 16px;
+    color: #828282;
+}
+.pickup-parent-parent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+.date-time {
+    color: rgb(33, 37, 41);
+}
+.date-time-wrap p {
+    margin: 0;
+}
+.total-koin {
+    font-weight: 600;
+}
+.div {
+    align-self: stretch;
+    font-size: 24px;
+    font-weight: 600;
+    color: #52c41a;
+}
+.koin {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    font-size: 20px;
+    color: rgb(33, 37, 41);
+}
+.pickup-date-time {
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 0px 12px;
+    gap: 12px;
+    font-size: 16px;
+    color: #828282;
+}
+.frame-parent {
+    border-radius: 16px;
+    border: 1px solid #dee2e6;
+    box-sizing: border-box;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 40px;
+    gap: 36px;
+    font-size: 20px;
+}
 @media screen and (max-width: 992px) {
+    .container,
+    .container-md,
+    .container-sm {
+        max-width: 100%;
+    }
+    #myNavbar {
+        justify-content: center;
+        padding: 0 40px;
+    }
+    .navbar-collapse {
+        padding-bottom: 20px;
+    }
+    .navbar-toggler {
+        position: absolute;
+        right: 20px;
+    }
     .myContainer {
         width: 100%;
         padding: 40px;
@@ -246,6 +365,16 @@ nav{
     }
 }
 @media screen and (max-width: 578px) {
+    #myNavbar {
+        justify-content: center;
+    }
+    .navbar-collapse {
+        padding-bottom: 20px;
+    }
+    .navbar-toggler {
+        position: absolute;
+        right: 20px;
+    }
     .myContainer {
         width: 100%;
         padding: 20px;
@@ -255,5 +384,12 @@ nav{
     }
     .card-title.product-title, .card-text {
         font-size: 14px;
+    }
+    .frame-parent {
+        flex-direction: column;
+    }
+    .pickup-date-time {
+        border-top: 1px solid #c7c7c7;
+        padding-top: 12px ;
     }
 }

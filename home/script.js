@@ -1,3 +1,9 @@
+const sisaKoinAwal = localStorage.getItem ('totalKoin');
+if(sisaKoinAwal !== null){
+    document.querySelector('.total-coin').innerHTML = sisaKoinAwal;
+} else {
+    document.querySelector('.total-coin').innerHTML = 0;
+}
 // popup confirm
 function showPopup(){
     const inputPhoneNumber = document.getElementById('phone');
@@ -97,10 +103,6 @@ document.addEventListener('DOMContentLoaded', function(){
     })
 })
 // display coin
-const sisaKoinAwal = localStorage.getItem ('totalKoin');
-if(sisaKoinAwal !== null){
-    document.querySelector('.total-coin').innerHTML = sisaKoinAwal;
-}
 
 
 // dropdown menu filter table history koin

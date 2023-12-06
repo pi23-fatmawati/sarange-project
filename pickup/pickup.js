@@ -1,53 +1,82 @@
 document.addEventListener("DOMContentLoaded", function () {
-  // Retrieve user information from local storage
   const userData = JSON.parse(localStorage.getItem("userSarange"));
-
-  // Check if user data exists in local storage
   if (userData) {
-    // Populate input fields with user information
     document.getElementById("namaInput").value = userData.nama;
     document.getElementById("nomorTeleponInput").value = userData.noHP;
     document.getElementById("alamatTextarea").value = userData.alamat;
   } else {
-    // Handle the case when user data is not found in local storage
     console.error("User data not found in local storage");
   }
 
-  // Add event listener for the Atur Jadwal button
-  document
-    .getElementById("pikcupButton")
-    .addEventListener("click", function () {
-      // Retrieve selected date
-      const selectedDate = document.querySelector("#pickup-date input").value;
-
-      // Retrieve selected time
-      const selectedTimeElement = document.querySelector(".timeBtn:checked");
-      if (selectedTimeElement) {
-        const selectedTime = selectedTimeElement.value;
-
-        // Create a new object with the pickup information
-        const pickupData = {
-          nama: document.getElementById("namaInput").value,
-          noHP: document.getElementById("nomorTeleponInput").value,
-          alamat: document.getElementById("alamatTextarea").value,
-          jadwal: selectedTime,
-          tanggal: selectedDate,
-        };
-
-        // Retrieve the existing data from localStorage
-        let existingData =
-          JSON.parse(localStorage.getItem("jadwalPengiriman")) || [];
-
-        // Add the new data to the array
-        existingData.push(pickupData);
-
-        // Save the updated array back to localStorage
-        localStorage.setItem("jadwalPengiriman", JSON.stringify(existingData));
-
-        // Perform further actions with the selected date and time (e.g., API request)
-        console.log("Data Jadwal Pengiriman:", existingData);
+  let radioButtons = document.querySelectorAll('input[name="timeBtn"]');
+  radioButtons.forEach((radioButton) => {
+    radioButton.addEventListener("change", () => {
+      radioButtons.forEach((otherRadioButton) => {
+        if (otherRadioButton !== radioButton) {
+          otherRadioButton.checked = false;
+          otherRadioButton.parentElement.style.backgroundColor = "transparent";
+          otherRadioButton.parentElement.style.color = "black";
+        }
+      });
+      if (radioButton.checked) {
+        radioButton.parentElement.style.backgroundColor = "#52C41A";
+        radioButton.parentElement.style.color = "white";
       } else {
-        console.error("No time selected");
+        radioButton.parentElement.style.backgroundColor = "transparent";
       }
     });
+  });
+  function generateId(prefix) {
+    const uniqueNumber = Date.now();
+    const randomComponent = Math.floor(Math.random() * 1000);
+    return `${prefix}-${uniqueNumber}-${randomComponent}`;
+}
+
+document.getElementById("pickupButton").addEventListener("click", function () {
+    const selectedDate = document.querySelector("#pickup-date input").value;
+    const selectedTime = document.querySelector('input[name="timeBtn"]:checked').value;
+    
+    if (selectedTime !== null) {
+        const orderID = generateId("ORDER");
+
+        const pickupData = {
+            orderID: orderID,  // Add orderID to the pickupData
+            nama: document.getElementById("namaInput").value,
+            noHP: document.getElementById("nomorTeleponInput").value,
+            alamat: document.getElementById("alamatTextarea").value,
+            jadwal: selectedTime,
+            tanggal: selectedDate,
+        };
+        const jadwalKirim = {
+            jadwal: selectedTime
+        };
+        const tanggalKirim = {
+            tanggal: selectedDate,
+        };
+        const statusData = {
+            status: "diproses",
+        };
+        
+        localStorage.setItem("orderID", JSON.stringify(orderID));
+        localStorage.setItem("jadwalPengiriman", JSON.stringify(pickupData));
+        localStorage.setItem("jadwalKirim", JSON.stringify(jadwalKirim));
+        localStorage.setItem("tanggalKirim", JSON.stringify(tanggalKirim));
+        localStorage.setItem("statusKirim", JSON.stringify(statusData));
+
+        console.log("Data Jadwal Pengiriman:", pickupData);
+        const modalTitle = document.querySelector(".modal-title");
+        const modalBody = document.querySelector(".modal-body");
+        modalTitle.textContent = "Jadwal penjemputan berhasil diatur.";
+        modalBody.innerHTML = `<p>Segera siapkan sampahmu ya! <br> Jadwal Penjemputan: ${selectedDate}, pukul ${selectedTime} WIB.</p>`;
+        const myModal = new bootstrap.Modal(document.getElementById("myModal"));
+        myModal.show();
+    } else {
+        const modalTitle = document.querySelector(".modal-title");
+        const modalBody = document.querySelector(".modal-body");
+        modalTitle.textContent = "Jadwal penjemputan gagal diatur.";
+        modalBody.innerHTML = `<p>Mohon pilih tanggal dan waktu yang valid.</p>`;
+        const myModal = new bootstrap.Modal(document.getElementById("myModal"));
+        myModal.show();
+    }
+  });
 });

@@ -1,4 +1,5 @@
 // Mengambil nilai dari setiap kunci di lokal storage
+const orderID = JSON.parse(localStorage.getItem("orderID")) || {};
 const jadwal = JSON.parse(localStorage.getItem("jadwalKirim")) || {};
 const tanggal = JSON.parse(localStorage.getItem("tanggalKirim")) || {};
 const totalKoin = JSON.parse(localStorage.getItem("koinSemua")) || {};
@@ -7,6 +8,7 @@ const detailBarang = JSON.parse(localStorage.getItem("jualBarang")) || {};
 
 // Membuat objek baru yang berisi nilai dari kunci-kunci tersebut
 const riwayatProses = {
+  orderID: orderID,
   jadwal: jadwal,
   tanggal: tanggal,
   totalKoin: totalKoin,
