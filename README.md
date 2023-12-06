@@ -11,11 +11,14 @@ Video Presentasi: https://shorturl.at/lmy03
 
 email & password user untuk login:
 
-sarangeuser@gmail.com
-password
+email: sarangeuser@gmail.com
 
-lita@gmail.com
-password2
+password: password
 
-merlin@gmail.com
-password3
+email: lita@gmail.com
+
+password: password2
+
+email: merlin@gmail.com
+
+password: password3
