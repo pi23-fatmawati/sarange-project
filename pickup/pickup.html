@@ -1,0 +1,157 @@
+<!-- lumayan bener -->
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="sortcut icon" href="../login/assets/shortcut-icon-sarange.svg" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="stylepickup.css" />
+    <title>Atur Penjemputan | Sarange</title>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light position-fixed">
+      <div class="container-fluid container-md" id="myNavbar">
+          <a class="navbar-brand" href="../home/home.html">
+              <img src="../assets/Full Logo 3.svg" alt="Sarange Logo">
+          </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse navbar-list" id="navbarSupportedContent">
+              <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                  <li class="nav-item me-5">
+                      <a  href="../home/home.html">Beranda</a>
+                  </li>
+                  <li class="nav-item me-5">
+                      <a href="../product/product.html">Jual Sampah</a>
+                  </li>
+                  <li class="nav-item me-5">
+                    <a href="../riwayat/success.html">Riwayat</a>
+                  </li>
+              </ul>
+              <a class="nav-link img-profile" href="#">
+                  <img src="../assets/profile.png" alt="">
+              </a>
+          </div>
+      </div>
+  </nav>
+    <div class="myContainer">
+        <div class="mb-3 detail-prod" id="header-page" onclick="window.history.go(-1);">
+            <i class="fa-solid fa-circle-arrow-left"></i>
+            Jual Sampah
+        </div>
+      <div class="mb-3" id="title-page">
+        <!-- <div class="mb-3"><i class="fa-regular fa-circle-arrow-left fa-xl" style="color: black;"></i></div> -->
+        <div id="container-title">
+          <h4>Atur Jadwal Penjemputan</h4>
+          <p>
+            Pastikan sampahmu sudah siap dan kamu berada di tempat saat waktu
+            penjemputan ya!
+          </p>
+        </div>
+      </div>
+      <div class="pickup-info">
+        <div class="pickup-user-address">
+          <div class="mb-3">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Nama"
+              disabled
+              id="namaInput"
+            />
+          </div>
+          <div class="mb-3">
+            <input
+              type="tel"
+              class="form-control"
+              placeholder="Nomor Telepon"
+              id="nomorTeleponInput"
+            />
+          </div>
+          <div class="mb-3" id="pickup-address-detail">
+            <h6>Alamat Penjemputan</h6>
+            <div class="icon-detail">
+              <div id="pin-icon">
+                <i class="fa-solid fa-map-location-dot" style="font-size: x-large; color: #8d8d8d"></i>
+              </div>
+              <div id="address-detail">
+                <div id="address-tag">Home</div>
+                <textarea
+                  class="form-control"
+                  rows="3"
+                  placeholder="Alamat"
+                  id="alamatTextarea"
+                ></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="pickup-date-time">
+          <div class="mb-3" id="pickup-date">
+            <h6>Tanggal Penjemputan</h6>
+            <div class="mb-3">
+              <input type="date" class="form-control" />
+            </div>
+          </div>
+          <div class="mb-3" id="pickup-time">
+            <h6>Waktu Penjemputan</h6>
+            <div class="mb-3" id="times">
+              <label id="time">
+                <input type="radio" name="timeBtn" value="08.00" class="mb-3 btn">
+                08:00
+              </label>
+              <label id="time">
+                <input type="radio" name="timeBtn" value="10.00" class="mb-3 btn">
+                10:00
+              </label>
+              <label id="time">
+                <input type="radio" name="timeBtn" value="12.00" class="mb-3 btn">
+                12:00
+              </label>
+              <label id="time">
+                <input type="radio" name="timeBtn" value="14.00" class="mb-3 btn">
+                14:00
+              </label>
+              <label id="time">
+                <input type="radio" name="timeBtn" value="16.00" class="mb-3 btn">
+                16:00
+              </label>
+            </div>
+          </div>
+          </div>
+        </div>
+        <div class="buttons">
+            <button type="button" class="btn" id="backButton" style="display: none;">Kembali</button>
+            <button type="button" class="btn" id="pickupButton" data-bs-toggle="modal" data-bs-target="#myModal">Atur Jadwal</button>
+          </div>
+      </div>
+    </div>
+    <div class="modal" tabindex="-1" id="myModal">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-icon"></div>
+            <div class="modal-header">
+              <h5 class="modal-title">Jadwal penjemputan berhasil diatur.</h5>
+              <a href="../riwayat/riwayatOrder.html"><button type="button" class="btn-close" id="close-pickup" data-bs-dismiss="modal" aria-label="Close"></button></a>
+            </div>
+            <div class="modal-body">
+              <p>Segera siapkan sampahmu ya!</p>
+            </div>
+          </div>
+        </div>
+      </div>         
+    <script
+      src="https://kit.fontawesome.com/7d2ff4abe5.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+    <script src="pickup.js"></script>
+  </body>
+</html>

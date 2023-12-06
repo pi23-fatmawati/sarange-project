@@ -1,0 +1,93 @@
+<!-- update lokal storage when button jual sekarang clicked -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="sortcut icon" href="../login/assets/shortcut-icon-sarange.svg">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Checkout</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="stylecheckout.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light position-fixed" id="navbar-1">
+      <div class="container-fluid container-md" id="myNavbar">
+          <a class="navbar-brand" href="../home/home.html">
+                <img src="../assets/Full Logo 3.svg" alt="Sarange Logo">
+          </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse navbar-list" id="navbarSupportedContent">
+              <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                  <li class="nav-item me-5">
+                      <a  href="../home/home.html">Beranda</a>
+                  </li>
+                  <li class="nav-item me-5">
+                      <a href="../product/product.html">Jual Sampah</a>
+                  </li>
+                  <li class="nav-item me-5">
+                      <a href="../riwayat/riwayatOrder.html">Riwayat</a>
+                  </li>
+              </ul>
+              <a class="nav-link img-profile" href="#">
+                  <img src="../assets/profile.png" alt="">
+              </a>
+          </div>
+      </div>
+  </nav>
+    <!-- Navbar end -->
+    <div id="myContainer">
+      <div
+      class="container table-responsive-lg table-responsive-md container-tabel"
+    >
+    <div class="mb-3 detail-prod" id="header-page" onclick="window.history.go(-1);">
+      <i class="fa-solid fa-circle-arrow-left" style="color: #52C41A;"></i>
+      Jual Sampah
+    </div>
+      <table class="table table-striped align-middle">
+        <thead class="text-center">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col" colspan="2">Jenis Sampah</th>
+            <th scope="col">Koin Didapat</th>
+            <th scope="col" id="counter-box">Jumlah (kg)</th>
+          </tr>
+        </thead>
+        <tbody class="text-center" id="table-body">
+          <!-- javascript -->
+        </tbody>
+      </table><br>
+      <br><br><br>
+    </div>
+    <!-- checkout start -->
+    <div class="checkoutBarang">
+      <nav class="navbar navbar-light fixed-bottom mt-5" id="navbar-2">
+        <div class="container-fluid d-flex ">
+          <div><span>Total berat: </span><span id="total-jumlah"></span> kg</div>
+          <div><span>Total koin: </span><span id="total-poin"></span></div>
+          <div>
+            <button
+              class="btn btn-success"
+              id="set-button"
+              disabled
+              onclick="window.location.href='../pickup/pickup.html'"
+            >
+              Atur Penjualan
+            </button>
+          </div>
+        </div>
+      </nav>
+    </div>
+    </div>
+    <script src="https://kit.fontawesome.com/7d2ff4abe5.js" crossorigin="anonymous"></script>
+    <script src="checkout.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+  </body>
+</html>

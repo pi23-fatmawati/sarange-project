@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Status Penjualan</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="styleprocess.css" />
+  </head>
+  <body>
+    <!-- Navbar start -->
+    <nav class="navbar navbar-expand-lg navbar-light position-fixed">
+      <div class="container-fluid container-md" id="myNavbar">
+          <a class="navbar-brand" href="../home/home.html">
+              <img src="../assets/Full Logo 3.svg" alt="Sarange Logo">
+          </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse navbar-list" id="navbarSupportedContent">
+              <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                  <li class="nav-item me-5">
+                      <a  href="../home/home.html">Beranda</a>
+                  </li>
+                  <li class="nav-item me-5">
+                      <a href="../product/product.html">Jual Sampah</a>
+                  </li>
+                  <li class="nav-item me-5 active">
+                    <a href="../riwayat/success.html">Riwayat</a>
+                  </li>
+              </ul>
+              <a class="nav-link img-profile" href="#">
+                  <img src="../assets/profile.png" alt="">
+              </a>
+          </div>
+      </div>
+  </nav>
+    <!-- Navbar end -->
+    <!-- table start-->
+    <div
+      class="container table-responsive-lg table-responsive-md container-tabel"
+    >
+      <!-- <div class="menu-4">
+        <a href="index.html">Semua</a>
+        <a href="process.html">Diproses</a>
+        <a href="success.html">Selesai</a>
+        <a href="failed.html">Dibatalkan</a>
+      </div> -->
+      <div class="mb-3 detail-prod" id="header-page">
+        Transaksi Diproses
+      </div>
+      <table class="table table-striped align-middle">
+        <thead class="text-center">
+          <tr>
+            <th scope="col">Tanggal Transaksi</th>
+            <th scope="col">Waktu Penjemputan</th>
+            <th scope="col">Sampah yang dijual</th>
+            <th scope="col">Koin</th>
+            <th scope="col">Status</th>
+            <th scope="col">Aksi</th>
+          </tr>
+        </thead>
+        <tbody class="text-center" id="tabelRiwayatBody">
+          <!-- Data akan diisi disini secara dinamis -->
+        </tbody>
+      </table>
+    </div>
+    <!-- table end -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      const riwayatProses =
+        JSON.parse(localStorage.getItem("riwayatProses")) || {};
+      const tabelRiwayatBody = document.getElementById("tabelRiwayatBody");
+      function tambahkanRiwayatSelesai(riwayatSelesai) {
+        const riwayatSelesaiSebelumnya =
+          JSON.parse(localStorage.getItem("riwayatSelesai")) || [];
+        const isDuplicate = riwayatSelesaiSebelumnya.some((entry) =>
+          isEqual(entry, riwayatSelesai)
+        );
+
+        if (!isDuplicate) {
+          localStorage.setItem(
+            "riwayatSelesai",
+            JSON.stringify([...riwayatSelesaiSebelumnya, riwayatSelesai])
+          );
+        }
+      }
+      function isEqual(obj1, obj2) {
+        return (
+          obj1.jadwal === obj2.jadwal &&
+          obj1.tanggal === obj2.tanggal &&
+          obj1.koin === obj2.koin &&
+          obj1.namaBarang === obj2.namaBarang
+        );
+      }
+      if (Object.keys(riwayatProses).length !== 0) {
+        const baris = tabelRiwayatBody.insertRow();
+
+        const selTanggal = baris.insertCell(0);
+        const selWaktu = baris.insertCell(1);
+        const selSampah = baris.insertCell(2);
+        const selKoin = baris.insertCell(3);
+        const selStatus = baris.insertCell(4);
+        const selAksi = baris.insertCell(5);
+
+        selTanggal.textContent = riwayatProses.tanggal.tanggal || "";
+        selWaktu.textContent = riwayatProses.jadwal.jadwal || "";
+        selSampah.textContent =
+          generateSampahText(riwayatProses.detailBarang) || "";
+        selKoin.textContent = riwayatProses.totalKoin || "";
+
+        let status = "Diproses";
+        selStatus.textContent = status;
+        if (status === "Diproses") {
+          selStatus.innerHTML = `<span style="background-color: #FFD666; padding: 5px 10px; border-radius: 16px;">${status}</span>`;
+
+          setTimeout(() => {
+            status = "Selesai";
+            selStatus.textContent = status;
+            selStatus.innerHTML = `<span style="background-color: #52C41A; padding: 5px 10px; border-radius: 16px; color: white">${status}</span>`;
+            window.alert(
+              "Barangmu telah dijemput, Selesaikan penjualan untuk mendapatkan Koin"
+            );
+            tambahkanRiwayatSelesai({
+              tanggal: riwayatProses.tanggal.tanggal,
+              waktu: riwayatProses.jadwal.jadwal,
+              sampah: generateSampahText(riwayatProses.detailBarang),
+              koin: riwayatProses.totalKoin,
+            });
+            window.location.href = "success.html";
+          }, 3000);
+        }
+        selAksi.innerHTML =
+          '<button class="btn" id="detail-order" style="border: 1px solid #52C41A; color: #52C41A;>Cek Detail</button>';
+      } else {
+        tabelRiwayatBody.innerHTML =
+          "<tr><td colspan='6'>Tidak ada data riwayat proses.</td></tr>";
+      }
+      function generateSampahText(detailBarang) {
+        if (detailBarang && detailBarang.length > 0) {
+          return detailBarang
+            .map((item) => `${item.namaSampah} (x ${item.jumlah}kg)`)
+            .join(", ");
+        }
+        return "";
+      }
+    </script>
+  </body>
+</html>

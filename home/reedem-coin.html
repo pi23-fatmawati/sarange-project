@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="sortcut icon" href="../assets/shortcut-icon-sarange.svg">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="./style.css">
+    <title>Reedem Coin | Sarange</title>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light position-fixed">
+        <div class="container-fluid container-md" id="myNavbar">
+            <a class="navbar-brand" href="#">
+                <img src="../assets/Full Logo 3.svg" alt="">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse navbar-list" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item me-5">
+                        <a  href="./home.html">Beranda</a>
+                    </li>
+                    <li class="nav-item me-5">
+                        <a href="../product/product.html">Jual Sampah</a>
+                    </li>
+                    <li class="nav-item me-5">
+                        <a href="../riwayat/success.html">Riwayat</a>
+                    </li>
+                </ul>
+                <a class="nav-link img-profile" href="#">
+                    <img src="../assets/profile.png" alt="">
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- home-reedem coin -->
+    <div class="home-reedem container-md">
+        <div class="mb-3 detail-prod" id="header-page" onclick="window.history.go(-1);">
+            <i class="fa-solid fa-circle-arrow-left"></i>
+            Beranda
+        </div>
+        <a href="./history-coin.html">
+            <div class="user-coin d-flex">
+                <div class="coin-box">
+                    <p>Koinmu</p>
+                    <div class="desc-coin d-flex">
+                        <img src="../assets/koin.png" alt="">
+                        <h3 class="total-coin" id="koin-total">0</h3>
+                        <p>Koin</p>
+                    </div>     
+                </div>       
+            </div>
+        </a>
+        <div id="reedem-coin"></div><br>
+    </div>
+    <footer class="fixed-bottom" style="display: none;">
+        <div class="help">
+            Pusat Bantuan:
+            <a href="mailto:sarangeeeee.id@gmail.com">
+                <i class="fa-solid fa-envelope"></i>
+            </a>
+            <a href="https://www.whatasapp.com">
+                <i class="fa-solid fa-phone"></i>
+            </a>
+        </div>
+        <div class="copyright">&copy Sarange 2023. Hak Cipta Dilindungi.</div>
+    </footer>
+    <script
+      src="https://kit.fontawesome.com/7d2ff4abe5.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="./script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</body>
+</html>

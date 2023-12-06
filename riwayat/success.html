@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="sortcut icon" href="../assets/shortcut-icon-sarange.svg">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="styleprocess.css">
+    <title>Riwayat | Sarange</title>
+</head>
+<body class="d-flex flex-column min-vh-100">
+    <nav class="navbar navbar-expand-lg navbar-light position-fixed">
+        <div class="container-fluid container-md" id="myNavbar">
+            <a class="navbar-brand" href="../home/home.html">
+                <img src="../assets/Full Logo 3.svg" alt="Sarange Logo">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse navbar-list" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item me-5">
+                        <a  href="../home/home.html">Beranda</a>
+                    </li>
+                    <li class="nav-item me-5">
+                        <a href="../product/product.html">Jual Sampah</a>
+                    </li>
+                    <li class="nav-item me-5 active">
+                      <a href="../riwayat/success.html">Riwayat</a>
+                    </li>
+                </ul>
+                <a class="nav-link img-profile" href="#">
+                    <img src="../assets/profile.png" alt="">
+                </a>
+            </div>
+        </div>
+    </nav>
+    <!-- Navbar end -->
+    <!-- table start-->
+    <div
+      class="container table-responsive-lg table-responsive-md container-tabel"
+    >
+      <!-- <div class="menu-4">
+        <a href="index.html">Semua</a>
+        <a href="process.html">Diproses</a>
+        <a href="success.html">Selesai</a>
+        <a href="failed.html">Dibatalkan</a>
+      </div> -->
+      <div class="mb-3 detail-prod" id="header-page">
+        <i class="fa-solid fa-clock-rotate-left"></i>
+        Riwayat Transaksi
+      </div>
+      <table class="table table-striped align-middle">
+        <thead class="text-center">
+          <tr>
+            <th scope="col">Tanggal Transaksi</th>
+            <th scope="col">Waktu Penjemputan</th>
+            <th scope="col">Sampah yang dijual</th>
+            <th scope="col">Koin</th>
+            <th scope="col">Status</th>
+            <th scope="col">Aksi</th>
+          </tr>
+        </thead>
+        <tbody class="text-center" id="tabelRiwayatBody">
+          <!-- data akan diisi di sini -->
+        </tbody>
+      </table>
+    </div>
+    <!-- table end -->
+    <script
+      src="https://kit.fontawesome.com/7d2ff4abe5.js"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+    <!-- <script src="script.js"></script> -->
+    <script>
+      const riwayatSelesai = JSON.parse(localStorage.getItem("riwayatSelesai")) || [];
+      const tabelRiwayatBody = document.getElementById("tabelRiwayatBody");
+      const koinValues = [];
+      riwayatSelesai.forEach(function (transaksi, index) {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+                <td>${transaksi.tanggal}</td>
+                <td>${transaksi.waktu}</td>
+                <td>${transaksi.sampah}</td>
+                <td>${transaksi.koin}</td>
+                <td><span style="background-color: #52C41A; padding: 5px 10px; border-radius: 16px; color: white">Selesai</span></td>
+                <td><button class="detail-order btn" id="data-order-index" style="border: 1px solid #52C41A; color: #52C41A;">Cek Detail</button></td>
+            `;
+        koinValues.push(parseFloat(transaksi.koin));
+
+        tabelRiwayatBody.appendChild(row);
+      });
+      const transaksi = JSON.parse(localStorage.getItem('transaksi'));
+      let totalTransaksi = 0;
+      if(transaksi){
+        totalTransaksi = transaksi.map(item => item.jumlah).reduce((sum, value) => sum + parseFloat(value), 0);
+      }
+      const totalKoin = koinValues.reduce((sum, value) => sum + parseFloat(value), 0);
+      localStorage.setItem("totalKoin", totalKoin - totalTransaksi);
+      localStorage.setItem("koinValues", JSON.stringify(koinValues));
+      // const detailOrderButtons = document.querySelectorAll('.detail-order');
+      // detailOrderButtons.forEach(button => {
+      //     button.addEventListener('click', function () {
+      //         const orderIndex = this.getAttribute('data-order-index');
+      //         const orderDetails = riwayatSelesai[orderIndex];
+      //         localStorage.setItem('currentOrderDetails', JSON.stringify(orderDetails));
+      //         window.location.href = '../order/order-detail.html';
+      //     });
+      // });
+    </script>
+  </body>
+</html>
