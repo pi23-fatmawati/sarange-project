@@ -27,7 +27,7 @@
             <div class="popup-klaim-text">
                 <img src="../assets/Logo Icon.png" alt="">
                 <p>Nomor: <span id="phone-number"></span></p>
-                <p>Email: <span>xxx@xxx.com</span></p>
+                <p>Email: <span id="email-user"></span></p>
                 <p class="desc-popup">Pastikan nomor handphone dan email anda sudah benar</p>
                 <button class="btn-close-popup" id="close-popup" onclick="closePopup()">Kembali</button>
                 <a href="./klaim-finish.html" class="button-klaim" onclick="submitNumber()">Kirim</a>
@@ -37,5 +37,12 @@
     
     <script src="./script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script>
+        const emailUser = JSON.parse(localStorage.getItem("userSarange"));
+        if (emailUser) {
+            const userHomeEmail = document.getElementById("email-user");
+            userHomeEmail.textContent = emailUser.email;
+        }
+    </script>
 </body>
 </html>

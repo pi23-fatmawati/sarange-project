@@ -493,7 +493,7 @@ footer {
         right: 20px;
     }
     .home-img .text-home{
-      top: 24%;
+      top: 35%;
     }
     .home-img .text-home-2{
         margin-bottom: 30px;
@@ -517,7 +517,7 @@ footer {
         right: 20px;
     }
     .home-img .text-home{
-        top: 20vh;
+        top: 28vh;
     }
     .home-img .text-home h3{
         font-size: 2vw;
@@ -543,7 +543,7 @@ footer {
         height: 4vh;
     }
     .card-coin a p, .card-coin a span{
-        height: 10px;
+        height: 30px;
         font-size: 3vw;
         padding-top: 1vh !important;
     }

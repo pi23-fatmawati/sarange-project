@@ -95,18 +95,23 @@
 
         tabelRiwayatBody.appendChild(row);
       });
+      const transaksi = JSON.parse(localStorage.getItem('transaksi'));
+      let totalTransaksi = 0;
+      if(transaksi){
+        totalTransaksi = transaksi.map(item => item.jumlah).reduce((sum, value) => sum + parseFloat(value), 0);
+      }
       const totalKoin = koinValues.reduce((sum, value) => sum + parseFloat(value), 0);
-      localStorage.setItem("totalKoin", totalKoin);
+      localStorage.setItem("totalKoin", totalKoin - totalTransaksi);
       localStorage.setItem("koinValues", JSON.stringify(koinValues));
-      const detailOrderButtons = document.querySelectorAll('.detail-order');
-      detailOrderButtons.forEach(button => {
-          button.addEventListener('click', function () {
-              const orderIndex = this.getAttribute('data-order-index');
-              const orderDetails = riwayatSelesai[orderIndex];
-              localStorage.setItem('currentOrderDetails', JSON.stringify(orderDetails));
-              window.location.href = '../order/order-detail.html';
-          });
-      });
+      // const detailOrderButtons = document.querySelectorAll('.detail-order');
+      // detailOrderButtons.forEach(button => {
+      //     button.addEventListener('click', function () {
+      //         const orderIndex = this.getAttribute('data-order-index');
+      //         const orderDetails = riwayatSelesai[orderIndex];
+      //         localStorage.setItem('currentOrderDetails', JSON.stringify(orderDetails));
+      //         window.location.href = '../order/order-detail.html';
+      //     });
+      // });
     </script>
   </body>
 </html>
